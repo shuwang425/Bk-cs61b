@@ -3,8 +3,8 @@ public class NBody {
     */
 	public static double readRadius (String planetsTxtPath) {
 
-		In in = new In ("./data/planets.txt");
-		int number = in.readInt();
+		In in = new In(planetsTxtPath);
+		in.readInt();
 		double radius = in.readDouble();
 		return radius;
 
@@ -17,7 +17,7 @@ public class NBody {
     public static Planet[] readPlanets (String planetsTxtPath) {
         In in = new In ("./data/planets.txt");
 		int number = in.readInt();
-		Planet[] planet = new Planet[number];
+		Planet[] planets = new Planet[number];
     	in.readDouble();
     	for (int i = 0; i < number; i++){
     		double xP = in.readDouble();
@@ -26,11 +26,11 @@ public class NBody {
     		double yV = in.readDouble();
     		double m = in.readDouble();
     		String img = in.readString();
-    		planet[i] = new Planet (xP, yP, xV, yV, m, img);
+    		planets[i] = new Planet (xP, yP, xV, yV, m, img);
 
 
     	}
-    	return planet;
+    	return planets;
 
     }
     /** drwaing the initial universe state using main.
@@ -51,8 +51,8 @@ public class NBody {
     	StdDraw.picture(0, 0, "./images/starfield.jpg");
 
     	//draw multi bodys
-    	for (Planet planet: Planets){
-    		planet.draw();
+    	for (Planet planets: Planets){
+    		planets.draw();
     	}
         
         /**
