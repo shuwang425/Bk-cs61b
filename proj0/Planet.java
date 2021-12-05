@@ -6,12 +6,12 @@
 //double mass: Its mass
 //String imgFileName: The name of the file that corresponds to the image that depicts the body (for example, jupiter.gif)*/
 public class Planet {
-	double xxPos;
-    double yyPos;
-    double xxVel;
-    double yyVel;
-    double mass;
-    String imgFileName;
+	public double xxPos;
+    public double yyPos;
+    public double xxVel;
+    public double yyVel;
+    public double mass;
+    public String imgFileName;
     /* constructor 1  */
     public Planet (double xP, double yP, double xV, double yV, double m, String img){
     	xxPos = xP;
