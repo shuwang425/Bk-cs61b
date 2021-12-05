@@ -40,9 +40,9 @@ public class NBody {
     	double T = Double.parseDouble(args[0]);
     	double dt = Double.parseDouble(args[1]);
     	String filename = args[2];
-    	double uniRadius = NBody.readRadius(filename);
+    	double uniRadius = readRadius(filename);
 
-    	Planet[] Planets = NBody.readPlanets(filename);
+    	Planet[] Planets = readPlanets(filename);
 
     	// draw the back groudn using StdDraw
 
