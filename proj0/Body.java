@@ -31,15 +31,93 @@ public class Body {
         this.imgFileName = b.imgFileName;
 
     }
+    /** Create methods named calcDistance to calculates the distance between two bodys. 
+ * return the distance distance;
+ * */
+    public double calcDistance (Body b){
+        double dx = this.xxPos - b.xxPos;
+        double dy  = this.yyPos - b.yyPos;
+        double distance = Math.sqrt(dx*dx + dy*dy);
+        return distance;
+    }
+
+    /**  create a calcForceExertedBy to calculate the force exerted on this body.
+     * return the value force;
+    */
+    public double calcForceExertedBy (Body b) {
+        final double G = 6.67e-11;
+
+        double force = G * this.mass * b.mass /(calcDistance(b) * calcDistance(b));
+        return force;
+
+    }
+
+    /** calculate methods calcForceExertedByX to desccribe force in X direction
+     * and calcForceExertedByY to describe force in Y direction
+     * return the positive forceX and positive forceY;
+     */
+    public double calcForceExertedByX (Body b){
+        double dx = b.xxPos -this.xxPos;
+        double forceX = this.calcForceExertedBy(b)*dx/this.calcDistance(b);
+        
+            return forceX;
+        
+    }
+
+    public double calcForceExertedByY (Body b){
+        double dy = b.yyPos - this.yyPos;
+        double forceY = calcForceExertedBy(b)* dy/calcDistance(b);
+        
+            return forceY;
+       
+    }
+
+
+    /**Write methods calcNetForceExertedByX and calcNetForceExertedByY
+     *each take in an array of Bodys and calculates the net X and net Y force
+     * exerted by all bodies in that array upon the current Body.
+     * 
+     * */
+    public double calcNetForceExertedByX (Body[] bodys) {
+        double netX = 0.0;
+        for (Body i : bodys) {
+            if (i.equals(this)){
+              continue;  
+          } else {
+            netX = netX + this.calcForceExertedByX(i);
+          }
+        }
+        return netX;
+    }
+
+
+    public double calcNetForceExertedByY (Body[] bodys) {
+        double netY = 0.0;
+        for (Body i : bodys) {
+            if (i.equals(this)){
+              continue;  
+          } else {
+            netY = netY + this.calcForceExertedByY(i);
+          }
+        }
+        return netY;
+    }
+    /* updated the accelerate and velocity and postion
+    */
+    public void update (double dt, double fX, double fY){
+        double aX = fX/this.mass;
+        double aY = fY/this.mass;
+        this.xxVel += aX * dt;
+        this.yyVel += aY * dt;
+        this.xxPos += this.xxVel * dt;
+        this.yyPos += this.yyVel * dt;
+    }
+    // draw one body
+    public void draw() {
+        StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName);
+
+    }
+
+   
 } 
 
-/** Create methods named calcDistance to calculates the distance between two bodys. 
- * return the distance r;
- * */
-public double calcDistance {
-    double dx = this.xxPos - b.xxPos;
-    double dy  = this.yyPos - b.yyPos;
-    double r = Math.sqrt(dx*dx + dy*dy);
-    return r;
-
-}
